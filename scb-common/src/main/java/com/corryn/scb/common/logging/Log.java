@@ -9,9 +9,9 @@ import org.jboss.logging.Logger;
  * @author Romana Schubert
  *
  */
-public class Log
+public final class Log
 {
-    private static Logger LOG = Logger.getLogger("com.corryn.scb");
+    private static final Logger LOG = Logger.getLogger("com.corryn.scb");
 
     /**
      * @return the logger
