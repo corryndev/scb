@@ -7,6 +7,8 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.corryn.scb.common.logging.Log;
+
 /**
  * @author Romana Schubert
  *
@@ -30,7 +32,7 @@ public final class Digest
 	}
 	catch (final NoSuchAlgorithmException ex)
 	{
-	    // empty so far
+	    Log.getLog().error(ex.getMessage(), ex);
 	}
 	return null;
     }
