@@ -19,5 +19,10 @@
 			<groupId>com.corryn.scb</groupId>
 			<artifactId>scb-iam</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>org.jboss.spec.javax.ws.rs</groupId>
+            <artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
 </project>

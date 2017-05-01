@@ -10,13 +10,13 @@ import java.io.Serializable;
  */
 public interface Entity extends Serializable
 {
-	/**
-	 * @return the id
-	 */
-	public Long getId();
-	
-	/**
-	 * @param id the id
-	 */
-	public void setId(final Long id);
+    /**
+     * @return the id
+     */
+    public Long getId();
+
+    /**
+     * @param id the id
+     */
+    public void setId(final Long id);
 }

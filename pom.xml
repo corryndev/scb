@@ -18,6 +18,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<jboss.eap.repository.url>https://maven.repository.redhat.com/ga/</jboss.eap.repository.url>
 		<jboss.wildfly.version>10.0.0.Final</jboss.wildfly.version>
+
+		<junit.version>4.11</junit.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -42,6 +44,11 @@
 				<groupId>com.corryn.scb</groupId>
 				<artifactId>scb-web</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
