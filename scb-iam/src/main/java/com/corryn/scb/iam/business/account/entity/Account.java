@@ -1,5 +1,6 @@
-package com.corryn.scb.iam.entity;
+package com.corryn.scb.iam.business.account.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CollectionTable;
@@ -12,12 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.corryn.scb.common.entity.Entity;
-import com.corryn.scb.common.security.Digest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Defining an account
@@ -25,6 +27,7 @@ import com.corryn.scb.common.security.Digest;
  */
 @javax.persistence.Entity
 @Table(name = "account")
+@NamedQuery(name = "login", query = "select a from Account a left outer join fetch a.roles where a.name = :name and a.password = :password ")
 public class Account implements Entity
 {
     private static final long serialVersionUID = 1L;
@@ -32,14 +35,10 @@ public class Account implements Entity
     private Long id;
     private String name;
     private String password;
+    private String firstname;
+    private String lastname;
+    private Date lastLogin;
     private List<Role> roles;
-    
-    @PrePersist
-    @PreUpdate
-    public void onUpdate()
-    {
-	this.password = Digest.toMD5(this.password);
-    }
     
     /**
      * {@inheritDoc}
@@ -68,7 +67,7 @@ public class Account implements Entity
     @Column(name = "name")
     public String getName()
     {
-	return name;
+	return this.name;
     }
 
     /**
@@ -82,10 +81,11 @@ public class Account implements Entity
     /**
      * @return the password
      */
+    @JsonIgnore
     @Column(name = "password")
     public String getPassword()
     {
-	return password;
+	return this.password;
     }
 
     /**
@@ -97,15 +97,68 @@ public class Account implements Entity
     }
 
     /**
+     * @return the firstname
+     */
+    @Column(name = "firstname")
+    public String getFirstname()
+    {
+	return this.firstname;
+    }
+
+    /**
+     * @param firstname the firstname to set
+     */
+    public void setFirstname(String firstname)
+    {
+	this.firstname = firstname;
+    }
+
+    /**
+     * @return the lastname
+     */
+    @Column(name = "lastname")
+    public String getLastname()
+    {
+	return this.lastname;
+    }
+
+    /**
+     * @param lastname the lastname to set
+     */
+    public void setLastname(String lastname)
+    {
+	this.lastname = lastname;
+    }
+    
+    /**
+     * @return the lastLogin
+     */
+    @Column(name = "last_login")
+    @JsonIgnore
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getLastLogin()
+    {
+	return this.lastLogin;
+    }
+
+    /**
+     * @param lastLogin the lastLogin to set
+     */
+    public void setLastLogin(Date lastLogin)
+    {
+	this.lastLogin = lastLogin;
+    }
+    
+    /**
      * @return the roles
      */
     @Column(name="role") 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name="account_role", joinColumns = @JoinColumn(name="account"))
-    @ElementCollection(targetClass=Role.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass=Role.class, fetch = FetchType.LAZY)
     public List<Role> getRoles()
     {
-	return roles;
+	return this.roles;
     }
 
     /**

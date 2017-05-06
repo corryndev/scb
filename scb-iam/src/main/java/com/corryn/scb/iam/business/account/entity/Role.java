@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.entity;
+package com.corryn.scb.iam.business.account.entity;
 
 /**
  * @author Romana Schubert

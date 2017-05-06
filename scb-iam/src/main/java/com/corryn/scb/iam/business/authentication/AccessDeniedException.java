@@ -1,7 +1,7 @@
-package com.corryn.scb.iam.boundary;
+package com.corryn.scb.iam.business.authentication;
 
 /**
- * SecurityException
+ * AccessDeniedException
  * 
  * @author Romana Schubert
  *
