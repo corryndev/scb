@@ -3,7 +3,7 @@
  */
 package com.corryn.scb.iam.event;
 
-import com.corryn.scb.iam.business.account.entity.Account;
+import com.corryn.scb.iam.account.entity.Account;
 
 /**
  * @author Romana Schubert

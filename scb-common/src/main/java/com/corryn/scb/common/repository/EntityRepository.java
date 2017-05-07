@@ -4,6 +4,7 @@
 package com.corryn.scb.common.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -34,9 +35,10 @@ public abstract class EntityRepository<T extends Entity>
      * @param specification the specification
      * @return <T> instance
      */
-    public T get(final CriteriaSpecification<T> specification)
+    public Optional<T> get(final CriteriaSpecification<T> specification)
     {
-	return this.transform(specification).getSingleResult();
+	final List<T> result = this.query(specification);
+	return result.stream().findFirst();
     }
 
     /**
@@ -45,19 +47,10 @@ public abstract class EntityRepository<T extends Entity>
      */
     public List<T> query(final CriteriaSpecification<T> specification)
     {
-	return this.transform(specification).getResultList();
-    }
-
-    /**
-     * @param specification the specification
-     * @return {@link TypedQuery}
-     */
-    public TypedQuery<T> transform(final CriteriaSpecification<T> specification)
-    {
 	final CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
 	CriteriaQuery<T> query = builder.createQuery(this.getEntityClass());
 	query = specification.toCriteriaQuery(builder, query);
-	return this.getEntityManager().createQuery(query);
+	return this.getEntityManager().createQuery(query).getResultList();
     }
 
     /**
@@ -71,6 +64,22 @@ public abstract class EntityRepository<T extends Entity>
 	final CriteriaQuery<T> all = cq.select(rootEntry);
 	final TypedQuery<T> allQuery = this.getEntityManager().createQuery(all);
 	return allQuery.getResultList();
+    }
+
+    /**
+     * @param entity the entity
+     */
+    public void put(final T entity)
+    {
+	this.getEntityManager().merge(entity);
+    }
+
+    /**
+     * @param entity the entity
+     */
+    public void remove(final T entity)
+    {
+	this.getEntityManager().remove(entity);
     }
 
     /**

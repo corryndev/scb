@@ -11,6 +11,7 @@
 		<module>scb-common</module>
 		<module>scb-iam</module>
 		<module>scb-web</module>
+		<module>scb-security</module>
 	</modules>
 	<properties>
 		<!-- maven-compiler-plugin -->
@@ -23,6 +24,7 @@
 
 		<apache.commons.lang.version>3.5</apache.commons.lang.version>
 		<jackson.hibernate5.version>2.6.2</jackson.hibernate5.version>
+		<java.jwt.version>3.2.0</java.jwt.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -45,6 +47,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.corryn.scb</groupId>
+				<artifactId>scb-security</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.corryn.scb</groupId>
 				<artifactId>scb-web</artifactId>
 				<version>${project.version}</version>
 			</dependency>
@@ -62,6 +69,11 @@
 				<groupId>com.fasterxml.jackson.datatype</groupId>
 				<artifactId>jackson-datatype-hibernate5</artifactId>
 				<version>${jackson.hibernate5.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.auth0</groupId>
+				<artifactId>java-jwt</artifactId>
+				<version>${java.jwt.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

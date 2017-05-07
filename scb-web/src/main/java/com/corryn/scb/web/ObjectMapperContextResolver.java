@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.web.rs.config;
+package com.corryn.scb.web;
 
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;

@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.business.account;
+package com.corryn.scb.iam.account;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.corryn.scb.iam.business.account.entity.Account;
-import com.corryn.scb.iam.business.account.repository.AccountRepository;
+import com.corryn.scb.iam.account.entity.Account;
+import com.corryn.scb.iam.account.repository.AccountRepository;
 
 /**
  * @author Romana Schubert
@@ -24,14 +24,14 @@ public class AccountResource
 {
     @Inject
     private AccountRepository accountRepository;
-    
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Account> getAccounts()
     {
 	return this.accountRepository.list();
     }
-    
+
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)

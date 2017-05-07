@@ -1,13 +1,14 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.business.authentication;
+package com.corryn.scb.iam.authentication;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -21,7 +22,7 @@ public class AuthenticationResource
 {
     @Inject
     private AuthenticationService authenticationManager;
-    
+
     /**
      * Authenticate
      * 
@@ -35,10 +36,10 @@ public class AuthenticationResource
     {
 	try
 	{
-	    final AuthenticationToken authToken = this.authenticationManager.authenticate(name, password);
-	    return Response.ok(authToken).build();
+	    final String authToken = this.authenticationManager.authenticate(name, password);
+	    return Response.ok().header(HttpHeaders.AUTHORIZATION, String.format(authToken)).build();
 	}
-	catch (AccessDeniedException exception)
+	catch (final AccessDeniedException exception)
 	{
 	    return Response.status(Status.UNAUTHORIZED).build();
 	}

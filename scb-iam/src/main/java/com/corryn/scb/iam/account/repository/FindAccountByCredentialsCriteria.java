@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.business.account.repository;
+package com.corryn.scb.iam.account.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,8 +9,8 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import com.corryn.scb.common.repository.CriteriaSpecification;
-import com.corryn.scb.iam.business.account.entity.Account;
-import com.corryn.scb.iam.business.account.entity.Account_;
+import com.corryn.scb.iam.account.entity.Account;
+import com.corryn.scb.iam.account.entity.Account_;
 
 /**
  * FindAccountByCredentialsCriteria
@@ -22,7 +22,7 @@ public class FindAccountByCredentialsCriteria implements CriteriaSpecification<A
 {
     private final String name;
     private final String password;
-    
+
     /**
      * Constructor
      * 
@@ -34,16 +34,21 @@ public class FindAccountByCredentialsCriteria implements CriteriaSpecification<A
 	this.name = name;
 	this.password = password;
     }
-    
-    /* (non-Javadoc)
-     * @see com.corryn.scb.common.repository.CriteriaSpecification#toCriteriaQuery(javax.persistence.criteria.CriteriaBuilder, javax.persistence.criteria.CriteriaQuery)
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.corryn.scb.common.repository.CriteriaSpecification#toCriteriaQuery(
+     * javax.persistence.criteria.CriteriaBuilder,
+     * javax.persistence.criteria.CriteriaQuery)
      */
     @Override
-    public CriteriaQuery<Account> toCriteriaQuery(CriteriaBuilder builder, CriteriaQuery<Account> query)
+    public CriteriaQuery<Account> toCriteriaQuery(final CriteriaBuilder builder, final CriteriaQuery<Account> query)
     {
 	final Root<Account> root = query.from(Account.class);
-	Predicate nameCondition = builder.equal(root.get(Account_.name), this.name);
-	Predicate passwordCondition = builder.equal(root.get(Account_.password), this.password);
+	final Predicate nameCondition = builder.equal(root.get(Account_.name), this.name);
+	final Predicate passwordCondition = builder.equal(root.get(Account_.password), this.password);
 	root.fetch(Account_.roles);
 	query.where(nameCondition, passwordCondition);
 	return query;

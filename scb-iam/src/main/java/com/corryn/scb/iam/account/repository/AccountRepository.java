@@ -1,29 +1,28 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.business.account.repository;
+package com.corryn.scb.iam.account.repository;
 
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import com.corryn.scb.common.repository.EntityRepository;
-import com.corryn.scb.iam.business.account.entity.Account;
+import com.corryn.scb.iam.account.entity.Account;
 
 /**
  * @author Romana Schubert
  *
  */
-@Stateless
-@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+@Singleton
 public class AccountRepository extends EntityRepository<Account>
 {
     @PersistenceContext
     private EntityManager entityManager;
-    
-    /* (non-Javadoc)
+
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.corryn.scb.common.repository.EntityRepository#getEntityClass()
      */
     @Override
@@ -32,7 +31,9 @@ public class AccountRepository extends EntityRepository<Account>
 	return Account.class;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.corryn.scb.common.repository.EntityRepository#getEntityManager()
      */
     @Override

@@ -1,4 +1,4 @@
-package com.corryn.scb.iam.business.account.entity;
+package com.corryn.scb.iam.account.entity;
 
 import java.util.Date;
 import java.util.List;
