@@ -10,8 +10,8 @@
 	<modules>
 		<module>scb-common</module>
 		<module>scb-iam</module>
-		<module>scb-web</module>
 		<module>scb-security</module>
+		<module>scb-server</module>
 	</modules>
 	<properties>
 		<!-- maven-compiler-plugin -->
@@ -52,7 +52,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.corryn.scb</groupId>
-				<artifactId>scb-web</artifactId>
+				<artifactId>scb-server</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>

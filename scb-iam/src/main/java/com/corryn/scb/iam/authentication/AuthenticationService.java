@@ -48,6 +48,11 @@ public class AuthenticationService
     @Inject
     private Event<AccountAuthenticatedEvent> event;
 
+    /**
+     * Bearer <token>
+     */
+    public static final String AUTHORIZATION_TEMPLATE = "Bearer %s";
+
     private static final String JWT_ISSUER = "scb";
 
     /**

@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @javax.persistence.Entity
 @Table(name = "account")
-@NamedQuery(name = "login", query = "select a from Account a left outer join fetch a.roles where a.name = :name and a.password = :password ")
 public class Account implements Entity
 {
     private static final long serialVersionUID = 1L;
@@ -39,7 +37,7 @@ public class Account implements Entity
     private String lastname;
     private Date lastLogin;
     private List<Role> roles;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -56,7 +54,7 @@ public class Account implements Entity
      * {@inheritDoc}
      */
     @Override
-    public void setId(Long id)
+    public void setId(final Long id)
     {
 	this.id = id;
     }
@@ -73,7 +71,7 @@ public class Account implements Entity
     /**
      * @param name the name to set
      */
-    public void setName(String name)
+    public void setName(final String name)
     {
 	this.name = name;
     }
@@ -91,7 +89,7 @@ public class Account implements Entity
     /**
      * @param password the password to set
      */
-    public void setPassword(String password)
+    public void setPassword(final String password)
     {
 	this.password = password;
     }
@@ -108,7 +106,7 @@ public class Account implements Entity
     /**
      * @param firstname the firstname to set
      */
-    public void setFirstname(String firstname)
+    public void setFirstname(final String firstname)
     {
 	this.firstname = firstname;
     }
@@ -125,11 +123,11 @@ public class Account implements Entity
     /**
      * @param lastname the lastname to set
      */
-    public void setLastname(String lastname)
+    public void setLastname(final String lastname)
     {
 	this.lastname = lastname;
     }
-    
+
     /**
      * @return the lastLogin
      */
@@ -144,18 +142,18 @@ public class Account implements Entity
     /**
      * @param lastLogin the lastLogin to set
      */
-    public void setLastLogin(Date lastLogin)
+    public void setLastLogin(final Date lastLogin)
     {
 	this.lastLogin = lastLogin;
     }
-    
+
     /**
      * @return the roles
      */
-    @Column(name="role") 
+    @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="account_role", joinColumns = @JoinColumn(name="account"))
-    @ElementCollection(targetClass=Role.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "account_role", joinColumns = @JoinColumn(name = "account"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
     public List<Role> getRoles()
     {
 	return this.roles;
@@ -164,7 +162,7 @@ public class Account implements Entity
     /**
      * @param roles the roles to set
      */
-    public void setRoles(List<Role> roles)
+    public void setRoles(final List<Role> roles)
     {
 	this.roles = roles;
     }

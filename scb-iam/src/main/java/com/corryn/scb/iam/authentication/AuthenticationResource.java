@@ -37,7 +37,8 @@ public class AuthenticationResource
 	try
 	{
 	    final String authToken = this.authenticationManager.authenticate(name, password);
-	    return Response.ok().header(HttpHeaders.AUTHORIZATION, String.format(authToken)).build();
+	    return Response.ok().header(HttpHeaders.AUTHORIZATION,
+		    String.format(AuthenticationService.AUTHORIZATION_TEMPLATE, authToken)).build();
 	}
 	catch (final AccessDeniedException exception)
 	{

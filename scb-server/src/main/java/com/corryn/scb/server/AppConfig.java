@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.web;
+package com.corryn.scb.server;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

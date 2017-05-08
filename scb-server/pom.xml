@@ -6,9 +6,9 @@
 		<artifactId>scb</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>scb-web</artifactId>
+	<artifactId>scb-server</artifactId>
 	<name>${project.artifactId}:(${project.description})</name>
-	<description>web app</description>
+	<description>server</description>
 	<packaging>war</packaging>
 	<dependencies>
 		<dependency>
@@ -34,4 +34,12 @@
 			<artifactId>jackson-datatype-hibernate5</artifactId>
 		</dependency>
 	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
 </project>
