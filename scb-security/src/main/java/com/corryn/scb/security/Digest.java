@@ -1,11 +1,9 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.common.security;
+package com.corryn.scb.security;
 
 import java.math.BigInteger;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -17,14 +15,6 @@ import com.corryn.scb.common.logging.Log;
  */
 public final class Digest
 {
-    public static void main(final String args[]) throws NoSuchAlgorithmException
-    {
-	final KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-	keyPairGenerator.initialize(1024);
-	final KeyPair keyPair = keyPairGenerator.genKeyPair();
-	System.out.println(keyPair.getPrivate().getEncoded());
-    }
-
     /**
      * to MD5
      * 

@@ -9,12 +9,12 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import com.corryn.scb.common.security.Digest;
 import com.corryn.scb.iam.account.entity.Account;
 import com.corryn.scb.iam.account.repository.AccountRepository;
 import com.corryn.scb.iam.account.repository.FindAccountByCredentialsCriteria;
 import com.corryn.scb.iam.auth.AuthContext;
 import com.corryn.scb.iam.event.AccountAuthenticatedEvent;
+import com.corryn.scb.security.Digest;
 
 /**
  * AuthenticationManager
