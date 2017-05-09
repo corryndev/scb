@@ -1,4 +1,4 @@
-package com.corryn.scb.iam.authentication;
+package com.corryn.scb.iam.auth.authentication;
 
 /**
  * AccessDeniedException

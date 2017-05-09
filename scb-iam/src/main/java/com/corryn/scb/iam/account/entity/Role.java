@@ -9,6 +9,9 @@ package com.corryn.scb.iam.account.entity;
  */
 public enum Role
 {
+    /** DEFAULT */
+    NO,
+
     /** ADMIN */
     ADMIN,
     /** USER */

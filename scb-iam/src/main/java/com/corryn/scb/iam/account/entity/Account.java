@@ -166,4 +166,19 @@ public class Account implements Entity
     {
 	this.roles = roles;
     }
+
+    /**
+     * Check if the user has the given role assigned
+     * 
+     * @param role the role
+     * @return true if assigned, false otherwise
+     */
+    public boolean hasRole(final Role role)
+    {
+	if (this.getRoles() == null)
+	{
+	    return false;
+	}
+	return this.getRoles().contains(Role.ADMIN) ? true : this.getRoles().contains(role);
+    }
 }

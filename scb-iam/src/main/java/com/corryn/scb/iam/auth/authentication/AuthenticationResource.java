@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.authentication;
+package com.corryn.scb.iam.auth.authentication;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -37,8 +37,7 @@ public class AuthenticationResource
 	try
 	{
 	    final String authToken = this.authenticationManager.authenticate(name, password);
-	    return Response.ok().header(HttpHeaders.AUTHORIZATION,
-		    String.format(AuthenticationService.AUTHORIZATION_TEMPLATE, authToken)).build();
+	    return Response.ok().header(HttpHeaders.AUTHORIZATION, authToken).build();
 	}
 	catch (final AccessDeniedException exception)
 	{

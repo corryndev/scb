@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.corryn.scb.iam.account.entity.Account;
 import com.corryn.scb.iam.account.repository.AccountRepository;
+import com.corryn.scb.iam.auth.authorization.Authorization;
 
 /**
  * @author Romana Schubert
@@ -26,6 +27,7 @@ public class AccountResource
     private AccountRepository accountRepository;
 
     @GET
+    @Authorization
     @Produces(MediaType.APPLICATION_JSON)
     public List<Account> getAccounts()
     {
@@ -34,6 +36,7 @@ public class AccountResource
 
     @GET
     @Path("{id}")
+    @Authorization
     @Produces(MediaType.APPLICATION_JSON)
     public Account getAccount(@PathParam(value = "id") final Long id)
     {
