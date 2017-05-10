@@ -46,7 +46,7 @@ public class AuthenticationService
     public String authenticate(final String name, final String password) throws AccessDeniedException
     {
 	final Optional<Account> optionalAccount = this.accountRepository
-		.get(new FindAccountByCredentialsCriteria(name, Digest.toMD5(password)));
+		.get(new FindAccountByCredentialsCriteria(name, Digest.MD5(password)));
 	if (optionalAccount.isPresent())
 	{
 	    final Account account = optionalAccount.get();

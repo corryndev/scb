@@ -26,7 +26,7 @@ public class AccountService
      */
     public void createAccount(final Account account)
     {
-	account.setPassword(Digest.toMD5(account.getPassword()));
+	account.setPassword(Digest.MD5(account.getPassword()));
 	this.repository.put(account);
     }
 }

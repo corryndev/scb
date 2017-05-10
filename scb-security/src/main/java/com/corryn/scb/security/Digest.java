@@ -10,18 +10,20 @@ import java.security.NoSuchAlgorithmException;
 import com.corryn.scb.common.logging.Log;
 
 /**
+ * Digest
+ * 
  * @author Romana Schubert
  *
  */
-public final class Digest
+public class Digest
 {
     /**
-     * to MD5
+     * MD5
      * 
      * @param message the message to encrypt
      * @return the md5 hash
      */
-    public static String toMD5(final String message)
+    public static String MD5(final String message)
     {
 	try
 	{
