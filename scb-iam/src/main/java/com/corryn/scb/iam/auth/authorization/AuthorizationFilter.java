@@ -23,7 +23,7 @@ import com.corryn.scb.iam.auth.AuthContext;
 @Provider
 @Authorization
 @Priority(Priorities.AUTHENTICATION)
-public class AuthorizationContainerRequestFilter implements ContainerRequestFilter
+public class AuthorizationFilter implements ContainerRequestFilter
 {
     @Inject
     private AuthContext authContext;

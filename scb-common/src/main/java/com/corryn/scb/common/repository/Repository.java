@@ -12,23 +12,38 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.corryn.scb.common.entity.Entity;
+import com.corryn.scb.common.entity.Identity;
 
 /**
- * EntityRepository
+ * Repository
  * 
  * @author Romana Schubert
  *
  */
-public abstract class EntityRepository<T extends Entity>
+public abstract class Repository<T extends Identity>
 {
+    private final EntityManager entityManager;
+    private final Class<T> entityClass;
+
+    /**
+     * Constructor
+     * 
+     * @param entityManager the entity manager
+     * @param entityClass the entity class
+     */
+    public Repository(final EntityManager entityManager, final Class<T> entityClass)
+    {
+	this.entityManager = entityManager;
+	this.entityClass = entityClass;
+    }
+
     /**
      * @param id the id of the entity
      * @return the entity
      */
     public T get(final Long id)
     {
-	return this.getEntityManager().find(this.getEntityClass(), id);
+	return this.entityManager.find(this.entityClass, id);
     }
 
     /**
@@ -47,10 +62,10 @@ public abstract class EntityRepository<T extends Entity>
      */
     public List<T> query(final CriteriaSpecification<T> specification)
     {
-	final CriteriaBuilder builder = this.getEntityManager().getCriteriaBuilder();
-	CriteriaQuery<T> query = builder.createQuery(this.getEntityClass());
+	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+	CriteriaQuery<T> query = builder.createQuery(this.entityClass);
 	query = specification.toCriteriaQuery(builder, query);
-	return this.getEntityManager().createQuery(query).getResultList();
+	return this.entityManager.createQuery(query).getResultList();
     }
 
     /**
@@ -58,11 +73,11 @@ public abstract class EntityRepository<T extends Entity>
      */
     public final List<T> list()
     {
-	final CriteriaBuilder cb = this.getEntityManager().getCriteriaBuilder();
-	final CriteriaQuery<T> cq = cb.createQuery(this.getEntityClass());
-	final Root<T> rootEntry = cq.from(this.getEntityClass());
+	final CriteriaBuilder cb = this.entityManager.getCriteriaBuilder();
+	final CriteriaQuery<T> cq = cb.createQuery(this.entityClass);
+	final Root<T> rootEntry = cq.from(this.entityClass);
 	final CriteriaQuery<T> all = cq.select(rootEntry);
-	final TypedQuery<T> allQuery = this.getEntityManager().createQuery(all);
+	final TypedQuery<T> allQuery = this.entityManager.createQuery(all);
 	return allQuery.getResultList();
     }
 
@@ -71,7 +86,7 @@ public abstract class EntityRepository<T extends Entity>
      */
     public void put(final T entity)
     {
-	this.getEntityManager().merge(entity);
+	this.entityManager.merge(entity);
     }
 
     /**
@@ -79,16 +94,6 @@ public abstract class EntityRepository<T extends Entity>
      */
     public void remove(final T entity)
     {
-	this.getEntityManager().remove(entity);
+	this.entityManager.remove(entity);
     }
-
-    /**
-     * @return the entity class
-     */
-    public abstract Class<T> getEntityClass();
-
-    /**
-     * @return the entity manager
-     */
-    public abstract EntityManager getEntityManager();
 }

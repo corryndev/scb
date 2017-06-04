@@ -8,20 +8,21 @@ import java.security.interfaces.RSAPublicKey;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.corryn.scb.common.entity.Entity;
+import com.corryn.scb.common.entity.Identity;
 
 /**
  * @author Romana Schubert
  *
  */
-@javax.persistence.Entity
+@Entity
 @Table(name = "security_key")
-public class SecurityKey implements Entity
+public class SecurityKey implements Identity
 {
     private static final long serialVersionUID = 1L;
 

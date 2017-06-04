@@ -12,6 +12,7 @@
 		<module>scb-iam</module>
 		<module>scb-security</module>
 		<module>scb-server</module>
+		<module>scb-calendar</module>
 	</modules>
 	<properties>
 		<!-- maven-compiler-plugin -->
@@ -25,6 +26,8 @@
 		<apache.commons.lang.version>3.5</apache.commons.lang.version>
 		<jackson.hibernate5.version>2.6.2</jackson.hibernate5.version>
 		<java.jwt.version>3.2.0</java.jwt.version>
+
+		<wildfly-maven-plugin.version>1.0.1.Final</wildfly-maven-plugin.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -42,12 +45,17 @@
 			</dependency>
 			<dependency>
 				<groupId>com.corryn.scb</groupId>
+				<artifactId>scb-security</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.corryn.scb</groupId>
 				<artifactId>scb-iam</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.corryn.scb</groupId>
-				<artifactId>scb-security</artifactId>
+				<artifactId>scb-calendar</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -77,4 +85,18 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.wildfly.plugins</groupId>
+					<artifactId>wildfly-maven-plugin</artifactId>
+					<version>${wildfly-maven-plugin.version}</version>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>

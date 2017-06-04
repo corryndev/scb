@@ -43,7 +43,7 @@ public class AuthenticationService
      * 
      * @throws AccessDeniedException if access is denied
      */
-    public String authenticate(final String name, final String password) throws AccessDeniedException
+    public Account authenticate(final String name, final String password) throws AccessDeniedException
     {
 	final Optional<Account> optionalAccount = this.accountRepository
 		.get(new FindAccountByCredentialsCriteria(name, Digest.MD5(password)));
@@ -51,7 +51,7 @@ public class AuthenticationService
 	{
 	    final Account account = optionalAccount.get();
 	    this.event.fire(new AccountAuthenticatedEvent(account));
-	    return this.authContext.createAuthToken(account);
+	    return this.authContext.assignAuthToken(account);
 	}
 	throw new AccessDeniedException();
     }

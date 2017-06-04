@@ -8,8 +8,9 @@
 		<jta-data-source>java:jboss/datasources/SCB_DS</jta-data-source>
 		
 		<!-- include modules -->
-		<jar-file>lib/scb-iam-${project.version}.jar</jar-file>
 		<jar-file>lib/scb-security-${project.version}.jar</jar-file>
+		<jar-file>lib/scb-iam-${project.version}.jar</jar-file>
+		<jar-file>lib/scb-calendar-${project.version}.jar</jar-file>
 		
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

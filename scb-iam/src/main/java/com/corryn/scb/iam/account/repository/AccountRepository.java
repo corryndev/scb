@@ -3,42 +3,28 @@
  */
 package com.corryn.scb.iam.account.repository;
 
-import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-import com.corryn.scb.common.repository.EntityRepository;
+import com.corryn.scb.common.repository.Repository;
 import com.corryn.scb.iam.account.entity.Account;
 
 /**
+ * AccountRepository
+ * 
  * @author Romana Schubert
  *
  */
-@Singleton
-public class AccountRepository extends EntityRepository<Account>
+public class AccountRepository extends Repository<Account>
 {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    /*
-     * (non-Javadoc)
+    /**
+     * AccountRepository
      * 
-     * @see com.corryn.scb.common.repository.EntityRepository#getEntityClass()
+     * @param entityManager the entity manager
      */
-    @Override
-    public Class<Account> getEntityClass()
+    @Inject
+    public AccountRepository(final EntityManager entityManager)
     {
-	return Account.class;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.corryn.scb.common.repository.EntityRepository#getEntityManager()
-     */
-    @Override
-    public EntityManager getEntityManager()
-    {
-	return this.entityManager;
+	super(entityManager, Account.class);
     }
 }

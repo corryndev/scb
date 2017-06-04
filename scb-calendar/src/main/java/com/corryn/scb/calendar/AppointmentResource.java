@@ -1,7 +1,7 @@
 /**
  * This file is part of the SCB project
  */
-package com.corryn.scb.iam.account;
+package com.corryn.scb.calendar;
 
 import java.util.List;
 
@@ -12,31 +12,29 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import com.corryn.scb.iam.account.entity.Account;
-import com.corryn.scb.iam.account.repository.AccountRepository;
-import com.corryn.scb.iam.auth.authorization.Authorization;
+import com.corryn.scb.calendar.entity.Appointment;
+import com.corryn.scb.calendar.repository.AppointmentRepository;
 
 /**
- * AccountResource
+ * AppointmentResource
  * 
  * @author Romana Schubert
  *
  */
-@Path("accounts")
-public class AccountResource
+@Path("appointments")
+public class AppointmentResource
 {
     @Inject
-    private AccountRepository accountRepository;
-
+    private AppointmentRepository appointmentRepository;
+    
     /**
      * @return all appointments
      */
     @GET
-    @Authorization
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Account> getAccounts()
+    public List<Appointment> getAppointments()
     {
-	return this.accountRepository.list();
+	return this.appointmentRepository.list();
     }
 
     /**
@@ -44,10 +42,9 @@ public class AccountResource
      */
     @GET
     @Path("{id}")
-    @Authorization
     @Produces(MediaType.APPLICATION_JSON)
-    public Account getAccount(@PathParam(value = "id") final Long id)
+    public Appointment getAppointment(@PathParam(value = "id") final Long id)
     {
-	return this.accountRepository.get(id);
+	return this.appointmentRepository.get(id);
     }
 }

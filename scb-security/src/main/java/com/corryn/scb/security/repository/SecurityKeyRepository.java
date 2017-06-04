@@ -3,43 +3,28 @@
  */
 package com.corryn.scb.security.repository;
 
-import javax.ejb.Singleton;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
-import com.corryn.scb.common.repository.EntityRepository;
+import com.corryn.scb.common.repository.Repository;
 import com.corryn.scb.security.entity.SecurityKey;
 
 /**
+ * SecurityKeyRepository
+ * 
  * @author Romana Schubert
  *
  */
-@Singleton
-public class SecurityKeyRepository extends EntityRepository<SecurityKey>
+public class SecurityKeyRepository extends Repository<SecurityKey>
 {
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    /*
-     * (non-Javadoc)
+    /**
+     * SecurityKeyRepository
      * 
-     * @see com.corryn.scb.common.repository.EntityRepository#getEntityClass()
+     * @param entityManager
      */
-    @Override
-    public Class<SecurityKey> getEntityClass()
+    @Inject
+    public SecurityKeyRepository(final EntityManager entityManager)
     {
-	return SecurityKey.class;
+	super(entityManager, SecurityKey.class);
     }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.corryn.scb.common.repository.EntityRepository#getEntityManager()
-     */
-    @Override
-    public EntityManager getEntityManager()
-    {
-	return this.entityManager;
-    }
-
 }

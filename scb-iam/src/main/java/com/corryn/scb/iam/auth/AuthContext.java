@@ -3,8 +3,6 @@
  */
 package com.corryn.scb.iam.auth;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +31,9 @@ public class AuthContext
 
     private Algorithm algorithm;
 
+    private static final String ISSUER = "scb";
+    private static final String TOKEN_PREFIX = "Bearer ";
+
     /**
      * init
      */
@@ -44,16 +45,17 @@ public class AuthContext
     }
 
     /**
-     * Create an authentication token
+     * Assign an authentication token
      * 
      * @param account the account
      * @return authentication token
      */
-    public String createAuthToken(final Account account)
+    public Account assignAuthToken(final Account account)
     {
-	return "Bearer " + JWT.create().withSubject(account.getName()).withIssuer("scb").withIssuedAt(new Date())
-		.withExpiresAt(Date.from(LocalDateTime.now().plusDays(1).atZone(ZoneId.systemDefault()).toInstant()))
-		.sign(this.algorithm);
+	final String authToken = AuthContext.TOKEN_PREFIX + JWT.create().withSubject(account.getId().toString())
+		.withIssuer(AuthContext.ISSUER).withIssuedAt(new Date()).sign(this.algorithm);
+	account.setAuthToken(authToken);
+	return account;
     }
 
     /**
@@ -64,8 +66,8 @@ public class AuthContext
      */
     public void verifyAuthToken(final String authToken) throws JWTVerificationException
     {
-	final String token = authToken.substring("Bearer".length()).trim();
-	final JWTVerifier verifier = JWT.require(this.algorithm).withIssuer("scb").build();
+	final String token = authToken.substring(AuthContext.TOKEN_PREFIX.length() - 1).trim();
+	final JWTVerifier verifier = JWT.require(this.algorithm).withIssuer(AuthContext.ISSUER).build();
 	verifier.verify(token);
     }
 }

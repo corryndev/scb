@@ -13,11 +13,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.corryn.scb</groupId>
-			<artifactId>scb-common</artifactId>
+			<artifactId>scb-iam</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.corryn.scb</groupId>
-			<artifactId>scb-iam</artifactId>
+			<artifactId>scb-calendar</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.ws.rs</groupId>
@@ -33,6 +35,16 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate5</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.1-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
@@ -41,5 +53,14 @@
 				<filtering>true</filtering>
 			</resource>
 		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

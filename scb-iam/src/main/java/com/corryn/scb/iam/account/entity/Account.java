@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -16,17 +17,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
-import com.corryn.scb.common.entity.Entity;
+import com.corryn.scb.common.entity.Identity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Defining an account
  * 
  */
-@javax.persistence.Entity
+@Entity
 @Table(name = "account")
-public class Account implements Entity
+public class Account implements Identity
 {
     private static final long serialVersionUID = 1L;
 
@@ -36,6 +38,7 @@ public class Account implements Entity
     private String firstname;
     private String lastname;
     private Date lastLogin;
+    private String authToken;
     private List<Role> roles;
 
     /**
@@ -148,6 +151,24 @@ public class Account implements Entity
     }
 
     /**
+     * @return the authToken
+     */
+    @Transient
+    @JsonIgnore
+    public String getAuthToken()
+    {
+	return this.authToken;
+    }
+
+    /**
+     * @param authToken the authToken to set
+     */
+    public void setAuthToken(final String authToken)
+    {
+	this.authToken = authToken;
+    }
+
+    /**
      * @return the roles
      */
     @Column(name = "role")
@@ -165,20 +186,5 @@ public class Account implements Entity
     public void setRoles(final List<Role> roles)
     {
 	this.roles = roles;
-    }
-
-    /**
-     * Check if the user has the given role assigned
-     * 
-     * @param role the role
-     * @return true if assigned, false otherwise
-     */
-    public boolean hasRole(final Role role)
-    {
-	if (this.getRoles() == null)
-	{
-	    return false;
-	}
-	return this.getRoles().contains(Role.ADMIN) ? true : this.getRoles().contains(role);
     }
 }

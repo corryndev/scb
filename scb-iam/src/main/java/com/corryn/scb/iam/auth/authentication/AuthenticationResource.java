@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.corryn.scb.iam.account.entity.Account;
+
 /**
  * @author Romana Schubert
  *
@@ -36,8 +38,8 @@ public class AuthenticationResource
     {
 	try
 	{
-	    final String authToken = this.authenticationManager.authenticate(name, password);
-	    return Response.ok().header(HttpHeaders.AUTHORIZATION, authToken).build();
+	    final Account account = this.authenticationManager.authenticate(name, password);
+	    return Response.ok(account).header(HttpHeaders.AUTHORIZATION, account.getAuthToken()).build();
 	}
 	catch (final AccessDeniedException exception)
 	{

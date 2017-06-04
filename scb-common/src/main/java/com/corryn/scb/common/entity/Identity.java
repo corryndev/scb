@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Romana Schubert
  *
  */
-public interface Entity extends Serializable
+public interface Identity extends Serializable
 {
     /**
      * @return the id
