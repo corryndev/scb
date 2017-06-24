@@ -7,6 +7,7 @@ import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.ISO8601DateFormat;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 /**
@@ -25,6 +26,7 @@ public class ObjectMapperContextResolver implements ContextResolver<ObjectMapper
     {
         mapper = new ObjectMapper();
         mapper.registerModule(new Hibernate5Module());
+        mapper.setDateFormat(new ISO8601DateFormat());
     }
     
     /* (non-Javadoc)

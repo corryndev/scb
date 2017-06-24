@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -50,9 +51,9 @@ public abstract class Repository<T extends Identity>
      * @param specification the specification
      * @return <T> instance
      */
-    public Optional<T> get(final CriteriaSpecification<T> specification)
+    public Optional<T> get(final QuerySpecification<T> specification)
     {
-	final List<T> result = this.query(specification);
+	final List<T> result = this.list(specification);
 	return result.stream().findFirst();
     }
 
@@ -60,11 +61,11 @@ public abstract class Repository<T extends Identity>
      * @param specification the specification
      * @return List<T> entities
      */
-    public List<T> query(final CriteriaSpecification<T> specification)
+    public List<T> list(final QuerySpecification<T> specification)
     {
 	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 	CriteriaQuery<T> query = builder.createQuery(this.entityClass);
-	query = specification.toCriteriaQuery(builder, query);
+	query = specification.toQuery(builder, query);
 	return this.entityManager.createQuery(query).getResultList();
     }
 
@@ -95,5 +96,18 @@ public abstract class Repository<T extends Identity>
     public void remove(final T entity)
     {
 	this.entityManager.remove(entity);
+    }
+
+    /**
+     * bulk remove of elements
+     * 
+     * @param specification the remove specification
+     */
+    public void remove(final RemoveSpecification<T> specification)
+    {
+	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
+	CriteriaDelete<T> remove = builder.createCriteriaDelete(this.entityClass);
+	remove = specification.toDelete(builder, remove);
+	this.entityManager.createQuery(remove).executeUpdate();
     }
 }

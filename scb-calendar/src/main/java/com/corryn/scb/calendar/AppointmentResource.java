@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.corryn.scb.calendar.entity.Appointment;
 import com.corryn.scb.calendar.repository.AppointmentRepository;
+import com.corryn.scb.calendar.repository.FindOpenAppointmentsCriteria;
 
 /**
  * AppointmentResource
@@ -35,6 +36,14 @@ public class AppointmentResource
     public List<Appointment> getAppointments()
     {
 	return this.appointmentRepository.list();
+    }
+    
+    @GET
+    @Path("/open")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Appointment> getOpenAppointments()
+    {
+	return this.appointmentRepository.list(new FindOpenAppointmentsCriteria());
     }
 
     /**

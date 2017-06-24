@@ -7,14 +7,14 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.corryn.scb.common.repository.CriteriaSpecification;
+import com.corryn.scb.common.repository.QuerySpecification;
 import com.corryn.scb.security.entity.SecurityKey;
 
 /**
  * @author Romana Schubert
  *
  */
-public class FindSecurityKeyCriteria implements CriteriaSpecification<SecurityKey>
+public class FindSecurityKeyCriteria implements QuerySpecification<SecurityKey>
 {
     /*
      * (non-Javadoc)
@@ -25,7 +25,7 @@ public class FindSecurityKeyCriteria implements CriteriaSpecification<SecurityKe
      * javax.persistence.criteria.CriteriaQuery)
      */
     @Override
-    public CriteriaQuery<SecurityKey> toCriteriaQuery(final CriteriaBuilder builder,
+    public CriteriaQuery<SecurityKey> toQuery(final CriteriaBuilder builder,
 	    final CriteriaQuery<SecurityKey> query)
     {
 	final Root<SecurityKey> root = query.from(SecurityKey.class);

@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-import com.corryn.scb.common.repository.CriteriaSpecification;
+import com.corryn.scb.common.repository.QuerySpecification;
 import com.corryn.scb.iam.account.entity.Account;
 import com.corryn.scb.iam.account.entity.Account_;
 
@@ -18,7 +18,7 @@ import com.corryn.scb.iam.account.entity.Account_;
  * @author Romana Schubert
  *
  */
-public class FindAccountByCredentialsCriteria implements CriteriaSpecification<Account>
+public class FindAccountByCredentialsCriteria implements QuerySpecification<Account>
 {
     private final String name;
     private final String password;
@@ -44,13 +44,13 @@ public class FindAccountByCredentialsCriteria implements CriteriaSpecification<A
      * javax.persistence.criteria.CriteriaQuery)
      */
     @Override
-    public CriteriaQuery<Account> toCriteriaQuery(final CriteriaBuilder builder, final CriteriaQuery<Account> query)
+    public CriteriaQuery<Account> toQuery(final CriteriaBuilder builder, final CriteriaQuery<Account> query)
     {
-	final Root<Account> root = query.from(Account.class);
-	final Predicate nameCondition = builder.equal(root.get(Account_.name), this.name);
-	final Predicate passwordCondition = builder.equal(root.get(Account_.password), this.password);
-	root.fetch(Account_.roles);
-	query.where(nameCondition, passwordCondition);
+	final Root<Account> account = query.from(Account.class);
+	final Predicate nameCondition = builder.equal(account.get(Account_.name), this.name);
+	final Predicate passwordCondition = builder.equal(account.get(Account_.password), this.password);
+	account.fetch(Account_.roles);
+	query.select(account).where(nameCondition, passwordCondition);
 	return query;
     }
 }

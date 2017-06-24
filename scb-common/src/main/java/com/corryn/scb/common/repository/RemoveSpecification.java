@@ -4,18 +4,17 @@
 package com.corryn.scb.common.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.CriteriaDelete;
 
 /**
  * @author Romana Schubert
  *
  */
-public interface CriteriaSpecification<T>
+public interface RemoveSpecification<T>
 {
     /**
      * @param builder the builder
-     * @return the query
+     * @return the delete
      */
-    public CriteriaQuery<T> toCriteriaQuery(final CriteriaBuilder builder, final CriteriaQuery<T> query);
-
+    public CriteriaDelete<T> toDelete(final CriteriaBuilder builder, final CriteriaDelete<T> delete);
 }

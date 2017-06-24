@@ -1,4 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+$material-design-icons-font-path: "~material-design-icons-iconfont/dist/fonts/";
+
+@import "~material-design-icons-iconfont/dist/material-design-icons";
 @import 'assets/materia/_variables.scss';
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import '~bootstrap/scss/bootstrap.scss';
 @import 'assets/materia/_bootswatch.scss';
+
+hr{
+    margin-bottom: 0;
+}
+
+.card{
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    border: 0;
+}
+.side-header-container{
+    background-color: #f9f9f9;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+.side-header{
+    font-size: 20px;
+    line-height: 50px;
+}
