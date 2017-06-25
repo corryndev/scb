@@ -16,5 +16,5 @@ public interface RemoveSpecification<T>
      * @param builder the builder
      * @return the delete
      */
-    public CriteriaDelete<T> toDelete(final CriteriaBuilder builder, final CriteriaDelete<T> delete);
+    public CriteriaDelete<T> toRemove(final CriteriaBuilder builder, final CriteriaDelete<T> delete);
 }

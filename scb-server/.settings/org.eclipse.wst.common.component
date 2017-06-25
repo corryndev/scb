@@ -17,6 +17,9 @@
         <dependent-module archiveName="scb-calendar-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/scb-calendar/scb-calendar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="scb-league-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/scb-league/scb-league">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/scb-web/target/classes"/>
         <property name="context-root" value="scb-server"/>
     </wb-module>

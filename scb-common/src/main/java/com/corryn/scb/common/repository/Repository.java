@@ -107,7 +107,7 @@ public abstract class Repository<T extends Identity>
     {
 	final CriteriaBuilder builder = this.entityManager.getCriteriaBuilder();
 	CriteriaDelete<T> remove = builder.createCriteriaDelete(this.entityClass);
-	remove = specification.toDelete(builder, remove);
+	remove = specification.toRemove(builder, remove);
 	this.entityManager.createQuery(remove).executeUpdate();
     }
 }

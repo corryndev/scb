@@ -26,12 +26,12 @@ public class RemoveLegacyAppointmentsCriteria implements RemoveSpecification<App
      * @see com.corryn.scb.common.repository.RemoveSpecification#toDelete(javax.persistence.criteria.CriteriaBuilder, javax.persistence.criteria.CriteriaDelete)
      */
     @Override
-    public CriteriaDelete<Appointment> toDelete(final CriteriaBuilder builder, final CriteriaDelete<Appointment> delete)
+    public CriteriaDelete<Appointment> toRemove(final CriteriaBuilder builder, final CriteriaDelete<Appointment> remove)
     {
-	final Root<Appointment> appointment = delete.from(Appointment.class);
+	final Root<Appointment> appointment = remove.from(Appointment.class);
 	final Date today = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());	
 	final Predicate legacyPredicate = builder.lessThan(appointment.get(Appointment_.date), today);
-	delete.where(legacyPredicate);
-	return delete;
+	remove.where(legacyPredicate);
+	return remove;
     }
 }

@@ -13,6 +13,7 @@
 		<module>scb-security</module>
 		<module>scb-server</module>
 		<module>scb-calendar</module>
+		<module>scb-league</module>
 	</modules>
 	<properties>
 		<!-- maven-compiler-plugin -->
@@ -58,6 +59,11 @@
 				<artifactId>scb-calendar</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.corryn.scb</groupId>
+				<artifactId>scb-league</artifactId>
+				<version>${project.version}</version>
+			</dependency>			
 			<dependency>
 				<groupId>com.corryn.scb</groupId>
 				<artifactId>scb-server</artifactId>
